@@ -55,9 +55,6 @@ int PiDashWindow :: clock_update(){
   time_t current_time = std::time(nullptr);
   time_t timer_value = current_time - start_time;
 
-  time_t offset_for_testing = 3759;
-  timer_value += offset_for_testing;
-
   time_t seconds = timer_value%60;
   time_t mins = (timer_value/60)%60;
   time_t hours = (timer_value/3600)%60;
