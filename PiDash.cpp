@@ -72,7 +72,7 @@ void PiDashWindow :: setup_css(){
         std::cerr << "parsing error: " << error.what() << std::endl;
       });
   css_provider->load_from_path(
-      "/home/welol/Desktop/CPPTests/styles/styles.css");
+      "/home/welol/Desktop/DMSPiDash/styles/styles.css");
 
   Gtk::StyleContext::add_provider_for_display(
       Gdk::Display::get_default(), css_provider,
