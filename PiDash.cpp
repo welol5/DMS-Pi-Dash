@@ -56,7 +56,25 @@ int PiDashWindow :: clock_update(){
   time_t mins = (timer_value/60)%60;
   time_t hours = (timer_value/3600)%60;
 
-  clock_label.set_label(std::to_string(hours) + " : " + std::to_string(mins) + " : " + std::to_string(seconds));
+  std::string seconds_string;
+  std::string min_string;
+  std::string hours_string;
+
+  if(seconds < 10){
+    seconds_string = "0" + std::to_string(seconds);
+  } else {
+    seconds_string = std::to_string(seconds);
+  }
+
+  if(mins < 10){
+    min_string = "0" + std::to_string(mins);
+  } else {
+    min_string = std::to_string(mins);
+  }
+
+  hours_string = std::to_string(hours);
+
+  clock_label.set_label(hours_string + " : " + min_string + " : " + seconds_string);
   return 1;
 }
 
@@ -79,7 +97,7 @@ void PiDashWindow :: setup_css(){
 void PiDashWindow :: can_worker(){
   while(true){
     //read values
-    next_rpm = rand()%6900;
+    next_rpm = (next_rpm += 10)%6900;
     next_voltage = rand()%1024;
     next_oil_pressure = rand()%1024;
     next_coolent_temp = rand()%1024;
@@ -88,7 +106,7 @@ void PiDashWindow :: can_worker(){
     dispatcher.emit();
 
     //delay for testing
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
 
 }
