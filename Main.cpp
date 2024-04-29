@@ -3,6 +3,16 @@
 #include "PiDash.h"
 #include <fstream>
 
+/**
+ * Requirements:
+ * RPM
+ * Voltage
+ * Oil Pressure
+ * Coolent temp
+ * AFR
+ * Clock
+*/
+
 int main (int argc, char *argv[])
 {
   // std::ifstream css_file; css_file.open("/home/welol/Desktop/CPPTests/styles/styles.css");
@@ -18,13 +28,3 @@ int main (int argc, char *argv[])
   auto app = Gtk::Application::create("org.dallasmakerspace.pidash");
   return app->make_window_and_run<PiDashWindow>(argc, argv);
 }
-
-/**
- * Requirements:
- * RPM
- * Voltage
- * Oil Pressure
- * Coolent temp
- * AFR
- * Clock
-*/

@@ -10,5 +10,18 @@ GaugeCluster::GaugeCluster(){
         g->set_expand(true);
         attach(*g,i,0);
         set_expand(true);
+
+        std::string s = gauge_names[i];
+        gauges[s] = i;
     }
+}
+
+void GaugeCluster::update_gauge(std::string name, int value){
+    int location = gauges[name];
+
+    // Gauge *g = ((Gauge)(get_child_at(location,0)));
+    Gtk::Widget *w = get_child_at(location,0);
+    Gauge *g = dynamic_cast<Gauge*>(w);
+
+    g->update_value(value);
 }

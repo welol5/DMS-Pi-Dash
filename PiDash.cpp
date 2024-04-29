@@ -1,3 +1,4 @@
+#include <chrono>
 #include "PiDash.h"
 
 PiDashWindow :: PiDashWindow() {
@@ -7,7 +8,8 @@ PiDashWindow :: PiDashWindow() {
   Glib::signal_timeout().connect(sigc::mem_fun(*this, &PiDashWindow::clock_update), 500);
 
   //start can thread
-
+  can_thread = std::thread(&PiDashWindow::can_worker, this);
+  dispatcher.connect(sigc::mem_fun(*this, &PiDashWindow::update_gauges));
   
   setup_css();
 
@@ -37,7 +39,6 @@ PiDashWindow :: PiDashWindow() {
   set_child(rpm_other_pane);
 }
 
-//needs disbatcher for threading communication
 void PiDashWindow :: increase_rpms(){
   double current_rpms = rpm_bar.get_value();
   current_rpms += 100;
@@ -45,10 +46,6 @@ void PiDashWindow :: increase_rpms(){
     current_rpms = 0;
   }
   rpm_bar.set_value(current_rpms);
-}
-
-void PiDashWindow :: can_thread(){
-  
 }
 
 int PiDashWindow :: clock_update(){
@@ -77,4 +74,30 @@ void PiDashWindow :: setup_css(){
   Gtk::StyleContext::add_provider_for_display(
       Gdk::Display::get_default(), css_provider,
       GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+}
+
+void PiDashWindow :: can_worker(){
+  while(true){
+    //read values
+    next_rpm = rand()%6900;
+    next_voltage = rand()%1024;
+    next_oil_pressure = rand()%1024;
+    next_coolent_temp = rand()%1024;
+    next_afr = rand()%1024;
+
+    dispatcher.emit();
+
+    //delay for testing
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+  }
+
+}
+
+void PiDashWindow :: update_gauges(){
+  gauges.update_gauge("Voltage", next_voltage);
+  gauges.update_gauge("Oil pressure", next_oil_pressure);
+  gauges.update_gauge("Coolent temp", next_coolent_temp);
+  gauges.update_gauge("AFR", next_afr);
+
+  rpm_bar.set_value(next_rpm);
 }

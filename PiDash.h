@@ -1,5 +1,7 @@
 #include <iostream>
 #include <ctime>
+#include <thread>
+#include <stdlib.h>
 #include <gtkmm/window.h>
 #include <gtkmm/paned.h>
 #include <gtkmm/levelbar.h>
@@ -7,6 +9,7 @@
 #include <gtkmm/box.h>
 #include <gtkmm/button.h>
 #include <glibmm/main.h>
+#include <glibmm/dispatcher.h>
 #include <gtkmm/stylecontext.h>
 #include <gtkmm/cssprovider.h>
 #include "GaugeCluster.h"
@@ -31,9 +34,19 @@ class PiDashWindow : public Gtk::Window {
         Gtk::Button test_button;
 
         void increase_rpms();
-        void can_thread();
         int clock_update();
 
     private:
+        std::thread can_thread;
+        Glib::Dispatcher dispatcher;
+
+        int next_rpm;
+        int next_voltage;
+        int next_oil_pressure;
+        int next_coolent_temp;
+        int next_afr;
+
+        void can_worker();
+        void update_gauges();
         void setup_css();
 };
