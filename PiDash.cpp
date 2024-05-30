@@ -1,4 +1,11 @@
 #include <chrono>
+#include <cstring>
+#include <sys/socket.h>
+#include <sys/ioctl.h>
+#include <net/if.h>
+#include <linux/can.h>
+#include <linux/can/raw.h>
+#include <unistd.h>
 #include "PiDash.h"
 
 PiDashWindow :: PiDashWindow() {
@@ -6,6 +13,22 @@ PiDashWindow :: PiDashWindow() {
   //start clock thread
   start_time = std::time(nullptr);
   Glib::signal_timeout().connect(sigc::mem_fun(*this, &PiDashWindow::clock_update), 500);
+
+  //open can0
+  int canSocket;
+  struct sockaddr_can addr;
+  struct ifreq ifr;
+  std::cout << "opening socket on can0" << std::endl;
+  canSocket = socket(PF_CAN, SOCK_RAW, CAN_RAW);
+  strcpy(ifr.ifr_name, "can0");
+  ioctl(canSocket, SIOCGIFINDEX, &ifr);
+  addr.can_family = AF_CAN;
+  addr.can_ifindex = ifr.ifr_ifindex;
+  int bindCode = bind(canSocket, (struct sockaddr *)&addr, sizeof(addr))
+  if(bindCode < 0){
+    std::cout << "failed to bind socket" << std::endl;
+    return 1;
+  }
 
   //start can thread
   can_thread = std::thread(&PiDashWindow::can_worker, this);
@@ -29,7 +52,7 @@ PiDashWindow :: PiDashWindow() {
   clock_other_pane.set_start_child(clock_label);
 
   test_button.set_label("increase rpm");
-  test_button.signal_clicked().connect(sigc::mem_fun(*this, &PiDashWindow::increase_rpms));
+  test_button.signal_clicked().connect(sigc::mem_fun(*this, &PiDashWindow::increase_rpms, socket));
 
   // clock_other_pane.set_end_child(test_button);
 
@@ -94,7 +117,11 @@ void PiDashWindow :: setup_css(){
       GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
-void PiDashWindow :: can_worker(){
+void PiDashWindow :: can_worker(int socket){
+
+  struct can_frame frame;
+  int nbytes;
+
   while(true){
     //read values
     next_rpm = (next_rpm += 10)%6900;
@@ -102,6 +129,16 @@ void PiDashWindow :: can_worker(){
     next_oil_pressure = rand()%1024;
     next_coolent_temp = rand()%1024;
     next_afr = rand()%1024;
+
+    nbytes = read(socket, &frame, sizeof(can_frame));
+
+    if(nbytes < 0){
+      std::cout << "error reading message" << std::endl;
+    }
+
+    if(nbytes == sizeof(struct can_frame)){
+      std::cout << "can id: " << frame.can_id << std::endl;
+    }
 
     dispatcher.emit();
 
