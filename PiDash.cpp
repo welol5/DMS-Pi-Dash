@@ -24,7 +24,7 @@ PiDashWindow :: PiDashWindow() {
   ioctl(canSocket, SIOCGIFINDEX, &ifr);
   addr.can_family = AF_CAN;
   addr.can_ifindex = ifr.ifr_ifindex;
-  int bindCode = bind(canSocket, (struct sockaddr *)&addr, sizeof(addr))
+  int bindCode = bind(canSocket, (struct sockaddr *)&addr, sizeof(addr));
   if(bindCode < 0){
     std::cout << "failed to bind socket" << std::endl;
     return 1;
@@ -129,7 +129,6 @@ void PiDashWindow :: can_worker(int socket){
     next_oil_pressure = rand()%1024;
     next_coolent_temp = rand()%1024;
     next_afr = rand()%1024;
-
     nbytes = read(socket, &frame, sizeof(can_frame));
 
     if(nbytes < 0){

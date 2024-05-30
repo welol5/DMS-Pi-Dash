@@ -46,7 +46,7 @@ class PiDashWindow : public Gtk::Window {
         int next_coolent_temp;
         int next_afr;
 
-        void can_worker();
+        void can_worker(int socket);
         void update_gauges();
         void setup_css();
 };
