@@ -30,7 +30,7 @@ PiDashWindow :: PiDashWindow() {
   }
 
   //start can thread
-  can_thread = std::thread(&PiDashWindow::can_worker, this);
+  can_thread = std::thread(&PiDashWindow::can_worker, this, socket);
   dispatcher.connect(sigc::mem_fun(*this, &PiDashWindow::update_gauges));
   
   setup_css();
@@ -51,7 +51,7 @@ PiDashWindow :: PiDashWindow() {
   clock_other_pane.set_start_child(clock_label);
 
   test_button.set_label("increase rpm");
-  test_button.signal_clicked().connect(sigc::mem_fun(*this, &PiDashWindow::increase_rpms, socket));
+  test_button.signal_clicked().connect(sigc::mem_fun(*this, &PiDashWindow::increase_rpms));
 
   // clock_other_pane.set_end_child(test_button);
 
