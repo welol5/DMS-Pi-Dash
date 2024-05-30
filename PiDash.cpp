@@ -27,7 +27,6 @@ PiDashWindow :: PiDashWindow() {
   int bindCode = bind(canSocket, (struct sockaddr *)&addr, sizeof(addr));
   if(bindCode < 0){
     std::cout << "failed to bind socket" << std::endl;
-    return 1;
   }
 
   //start can thread
