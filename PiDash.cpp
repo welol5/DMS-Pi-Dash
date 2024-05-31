@@ -30,7 +30,7 @@ PiDashWindow :: PiDashWindow() {
   }
 
   //start can thread
-  can_thread = std::thread(&PiDashWindow::can_worker, this, socket);
+  can_thread = std::thread(&PiDashWindow::can_worker, this, canSocket);
   dispatcher.connect(sigc::mem_fun(*this, &PiDashWindow::update_gauges));
   
   setup_css();
@@ -128,7 +128,7 @@ void PiDashWindow :: can_worker(int socket){
     next_oil_pressure = rand()%1024;
     next_coolent_temp = rand()%1024;
     next_afr = rand()%1024;
-    nbytes = read(socket, &frame, sizeof(can_frame));
+    /*nbytes = read(socket, &frame, sizeof(can_frame));
 
     if(nbytes < 0){
       std::cout << "error reading message" << std::endl;
@@ -136,7 +136,7 @@ void PiDashWindow :: can_worker(int socket){
 
     if(nbytes == sizeof(struct can_frame)){
       std::cout << "can id: " << frame.can_id << std::endl;
-    }
+    }*/
 
     dispatcher.emit();
 
