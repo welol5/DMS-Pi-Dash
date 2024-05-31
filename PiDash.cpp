@@ -7,6 +7,7 @@
 #include <linux/can/raw.h>
 #include <unistd.h>
 #include "PiDash.h"
+#include "Megasquirt_simplified_dash_broadcast.h"
 
 PiDashWindow :: PiDashWindow() {
 
@@ -128,7 +129,7 @@ void PiDashWindow :: can_worker(int socket){
     next_oil_pressure = rand()%1024;
     next_coolent_temp = rand()%1024;
     next_afr = rand()%1024;
-    /*nbytes = read(socket, &frame, sizeof(can_frame));
+    nbytes = read(socket, &frame, sizeof(can_frame));
 
     if(nbytes < 0){
       std::cout << "error reading message" << std::endl;
@@ -136,7 +137,7 @@ void PiDashWindow :: can_worker(int socket){
 
     if(nbytes == sizeof(struct can_frame)){
       std::cout << "can id: " << frame.can_id << std::endl;
-    }*/
+    }
 
     dispatcher.emit();
 
