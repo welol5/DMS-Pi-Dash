@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include "PiDash.h"
 #include "Megasquirt_simplified_dash_broadcast.h"
+#include "Megasquirt_simplified_dash_broadcast.c"
 
 PiDashWindow :: PiDashWindow() {
 
@@ -110,7 +111,7 @@ void PiDashWindow :: setup_css(){
         std::cerr << "parsing error: " << error.what() << std::endl;
       });
   css_provider->load_from_path(
-      "/home/welol/Desktop/DMSPiDash/styles/styles.css");
+      "/home/pi/DMS-Pi-Dash/styles/styles.css");
 
   Gtk::StyleContext::add_provider_for_display(
       Gdk::Display::get_default(), css_provider,
@@ -118,31 +119,45 @@ void PiDashWindow :: setup_css(){
 }
 
 void PiDashWindow :: can_worker(int socket){
-
-  struct can_frame frame;
   int nbytes;
 
   while(true){
     //read values
-    next_rpm = (next_rpm += 10)%6900;
+    //next_rpm = (next_rpm += 10)%6900;
     next_voltage = rand()%1024;
     next_oil_pressure = rand()%1024;
     next_coolent_temp = rand()%1024;
     next_afr = rand()%1024;
+
+//    std::cout << "read frame" << std::endl;
+    struct can_frame frame;
     nbytes = read(socket, &frame, sizeof(can_frame));
+//    std::cout << "read nbytes: " << std::endl;
 
     if(nbytes < 0){
       std::cout << "error reading message" << std::endl;
-    }
+    } else if(nbytes == sizeof(struct can_frame)){
+//      std::cout << "can id: " << frame.can_id << std::endl;
+      __u32 canId = frame.can_id;
+      __u8 dataLength = frame.len;
+      __u8 *data = frame.data;
 
-    if(nbytes == sizeof(struct can_frame)){
-      std::cout << "can id: " << frame.can_id << std::endl;
-    }
+      can_obj_megasquirt_simplified_dash_broadcast_h_t unpackedData;
+      int resultCode = unpack_message(&unpackedData, (long)canId, (uint64_t)data, (uint8_t)dataLength,0);
+      if(canId == 1512){
 
+	__u16 tps = (data[6] << 8) | (data[7]);
+	__u16 rpm = (data[2] << 8) | (data[3]);
+
+	next_rpm = rpm;
+	std::cout << "tps: " << tps << std::endl;
+//        std::cout << "tps: " << (double)unpackedData.can_0x5e8_megasquirt_dash0.tps << std::endl;
+     }
+    }
     dispatcher.emit();
 
     //delay for testing
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    //std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
 
 }
