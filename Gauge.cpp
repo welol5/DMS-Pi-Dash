@@ -1,3 +1,11 @@
+#include <iostream>
+#include <ctime>
+#include <string>
+#include <gtkmm/paned.h>
+#include <gtkmm/label.h>
+#include <glibmm/main.h>
+#include <gtkmm/stylecontext.h>
+#include <gtkmm/cssprovider.h>
 #include "Gauge.h"
 
 Gauge :: Gauge(const Glib::ustring &name){

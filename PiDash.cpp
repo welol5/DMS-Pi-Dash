@@ -7,8 +7,6 @@
 #include <linux/can/raw.h>
 #include <unistd.h>
 #include "PiDash.h"
-#include "Megasquirt_simplified_dash_broadcast.h"
-#include "Megasquirt_simplified_dash_broadcast.c"
 
 PiDashWindow :: PiDashWindow() {
 
@@ -142,8 +140,6 @@ void PiDashWindow :: can_worker(int socket){
       __u8 dataLength = frame.len;
       __u8 *data = frame.data;
 
-      can_obj_megasquirt_simplified_dash_broadcast_h_t unpackedData;
-      int resultCode = unpack_message(&unpackedData, (long)canId, (uint64_t)data, (uint8_t)dataLength,0);
       if(canId == 1512){
 
 	__u16 tps = (data[6] << 8) | (data[7]);
