@@ -10,10 +10,6 @@
 
 PiDashWindow :: PiDashWindow() {
 
-  //start clock thread
-  start_time = std::time(nullptr);
-  Glib::signal_timeout().connect(sigc::mem_fun(*this, &PiDashWindow::clock_update), 500);
-
   //open can0
   int canSocket;
   struct sockaddr_can addr;
@@ -46,9 +42,8 @@ PiDashWindow :: PiDashWindow() {
   rpm_other_pane.set_orientation(Gtk::Orientation::VERTICAL);
   rpm_other_pane.set_start_child(rpm_bar);
 
-  clock_label.set_label("Clock");
-  clock_label.add_css_class("clock");
-  clock_other_pane.set_start_child(clock_label);
+  clock.add_css_class("clock");
+  clock_other_pane.set_start_child(clock);
 
   test_button.set_label("increase rpm");
   test_button.signal_clicked().connect(sigc::mem_fun(*this, &PiDashWindow::increase_rpms));
@@ -68,36 +63,6 @@ void PiDashWindow :: increase_rpms(){
     current_rpms = 0;
   }
   rpm_bar.set_value(current_rpms);
-}
-
-int PiDashWindow :: clock_update(){
-  time_t current_time = std::time(nullptr);
-  time_t timer_value = current_time - start_time;
-
-  time_t seconds = timer_value%60;
-  time_t mins = (timer_value/60)%60;
-  time_t hours = (timer_value/3600)%60;
-
-  std::string seconds_string;
-  std::string min_string;
-  std::string hours_string;
-
-  if(seconds < 10){
-    seconds_string = "0" + std::to_string(seconds);
-  } else {
-    seconds_string = std::to_string(seconds);
-  }
-
-  if(mins < 10){
-    min_string = "0" + std::to_string(mins);
-  } else {
-    min_string = std::to_string(mins);
-  }
-
-  hours_string = std::to_string(hours);
-
-  clock_label.set_label(hours_string + " : " + min_string + " : " + seconds_string);
-  return 1;
 }
 
 void PiDashWindow :: setup_css(){
@@ -147,13 +112,10 @@ void PiDashWindow :: can_worker(int socket){
 
 	next_rpm = rpm;
 	std::cout << "tps: " << tps << std::endl;
-//        std::cout << "tps: " << (double)unpackedData.can_0x5e8_megasquirt_dash0.tps << std::endl;
      }
     }
     dispatcher.emit();
 
-    //delay for testing
-    //std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
 
 }

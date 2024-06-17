@@ -12,7 +12,8 @@
 #include <glibmm/dispatcher.h>
 #include <gtkmm/stylecontext.h>
 #include <gtkmm/cssprovider.h>
-#include "GaugeCluster.h"
+#include "gui/GaugeCluster.h"
+#include "gui/Clock.h"
 
 class PiDashWindow : public Gtk::Window {
     public:
@@ -25,7 +26,7 @@ class PiDashWindow : public Gtk::Window {
         Gtk::LevelBar rpm_bar;
 
         Gtk::Paned clock_other_pane;
-        Gtk::Label clock_label;
+        Clock clock;
 
         GaugeCluster gauges;
 
