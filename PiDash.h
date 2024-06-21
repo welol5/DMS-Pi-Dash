@@ -14,6 +14,7 @@
 #include <gtkmm/cssprovider.h>
 #include "gui/GaugeCluster.h"
 #include "gui/Clock.h"
+#include "can/CanDecoder.h"
 
 class PiDashWindow : public Gtk::Window {
     public:

@@ -89,7 +89,7 @@ void PiDashWindow :: can_worker(int socket){
     //next_rpm = (next_rpm += 10)%6900;
     next_voltage = rand()%1024;
     next_oil_pressure = rand()%1024;
-    next_coolent_temp = rand()%1024;
+    //next_coolent_temp = rand()%1024;
     next_afr = rand()%1024;
 
 //    std::cout << "read frame" << std::endl;
@@ -107,10 +107,12 @@ void PiDashWindow :: can_worker(int socket){
 
       if(canId == 1512){
 
-	__u16 tps = (data[6] << 8) | (data[7]);
+	uint16_t tps = CanDecoder::decode1512(data).tps;
+	uint16_t coolent_temp = CanDecoder::decode1512(data).clt;
 	__u16 rpm = (data[2] << 8) | (data[3]);
 
 	next_rpm = rpm;
+	next_coolent_temp = coolent_temp/10;
 	std::cout << "tps: " << tps << std::endl;
      }
     }

@@ -3,15 +3,15 @@
 
 can_1512 CanDecoder :: decode1512(uint8_t data[]){
     can_1512 decodedData;
-    // decodedData.tps = (data[6] << 8) | (data[7]);
-    // decodedData.clt = (data[4] << 8) | (data[5]);
-	// decodedData.rpm = (data[2] << 8) | (data[3]);
-    // decodedData.map = (data[0] << 8) | (data[1]);
+    decodedData.tps = (data[6] << 8) | (data[7]);
+    decodedData.clt = (data[4] << 8) | (data[5]);
+    decodedData.rpm = (data[2] << 8) | (data[3]);
+    decodedData.map = (data[0] << 8) | (data[1]);
     
-    decodedData.tps = (uint16_t*)&data[6];
-    decodedData.clt= (uint16_t*)&data[4];
-    decodedData.rpm = (uint16_t*)&data[2];
-    decodedData.map = (uint16_t*)&data[0];
+//    decodedData.tps = (uint16_t*)&data[6];
+//    decodedData.clt = (uint16_t*)&data[4];
+//    decodedData.rpm = (uint16_t*)&data[2];
+//    decodedData.map = (uint16_t*)&data[0];
     
     return decodedData;
 }

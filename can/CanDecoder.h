@@ -1,11 +1,11 @@
 #include <cstdint>
 #include <linux/can.h>
 
-union can_1512{
-    uint16_t *tps;
-    uint16_t *clt;
-    uint16_t *rpm;
-    uint16_t *map;
+struct can_1512{
+    uint16_t tps;
+    uint16_t clt;
+    uint16_t rpm;
+    uint16_t map;
 };
 
 struct can_1513{
@@ -38,9 +38,9 @@ struct can_1516{
 
 class CanDecoder {
     public:
-        can_1512 decode1512(uint8_t data[]);
-        can_1513 decode1513(uint8_t data[]);
-        can_1514 decode1514(uint8_t data[]);
-        can_1515 decode1515(uint8_t data[]);
-        can_1516 decode1516(uint8_t data[]);
+        static can_1512 decode1512(uint8_t data[]);
+        static can_1513 decode1513(uint8_t data[]);
+        static can_1514 decode1514(uint8_t data[]);
+        static can_1515 decode1515(uint8_t data[]);
+        static can_1516 decode1516(uint8_t data[]);
 };
