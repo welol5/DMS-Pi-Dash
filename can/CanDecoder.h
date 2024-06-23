@@ -38,9 +38,9 @@ struct can_1516{
 
 class CanDecoder {
     public:
-        static can_1512 decode1512(uint8_t data[]);
-        static can_1513 decode1513(uint8_t data[]);
-        static can_1514 decode1514(uint8_t data[]);
-        static can_1515 decode1515(uint8_t data[]);
-        static can_1516 decode1516(uint8_t data[]);
+        static uint8_t decode1512(uint8_t data[], can_1512* decodedData);
+        static uint8_t decode1513(uint8_t data[], can_1513* decodedData);
+        static uint8_t decode1514(uint8_t data[], can_1514* decodedData);
+        static uint8_t decode1515(uint8_t data[], can_1515* decodedData);
+        static uint8_t decode1516(uint8_t data[], can_1516* decodedData);
 };

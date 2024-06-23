@@ -53,7 +53,7 @@ class PiDashWindow : public Gtk::Window {
         int next_mat;
         int next_pw2;
         int next_pw1;
-        int next_owseq1;
+        int next_pwseq1;
         int next_egt1;
         int next_egocor1;
         int next_afrtgt1;
@@ -63,7 +63,7 @@ class PiDashWindow : public Gtk::Window {
         int next_batt;
         int next_launch_timing;
         int next_tc_retard;
-        int next_VSS1
+        int next_VSS1;
 
 
         void can_worker(int socket);

@@ -104,17 +104,57 @@ void PiDashWindow :: can_worker(int socket){
 
       if(canId == 1512){
 
-	uint16_t tps = CanDecoder::decode1512(data).tps;
-	uint16_t coolent_temp = CanDecoder::decode1512(data).clt;
-	__u16 rpm = (data[2] << 8) | (data[3]);
+        can_1512 msg;
+        uint8_t success = CanDecoder::decode1512(data, &msg);
 
-	next_rpm = rpm;
-	next_coolent_temp = coolent_temp/10;
-	std::cout << "tps: " << tps << std::endl;
-     }
+	      next_rpm = msg.rpm;
+	      next_coolent_temp = msg.clt;
+        next_tps = msg.tps;
+        next_map = msg.map;
+
+      } else if(canId == 1513){
+
+        can_1513 msg;
+        uint8_t success = CanDecoder::decode1513(data, &msg);
+
+        next_adv_deg = msg.adv_deg;
+        next_mat = msg.mat;
+        next_pw2 = msg.pw2;
+        next_pw1 = msg.pw1;
+
+      } else if(canId == 1514){
+
+        can_1514 msg;
+        uint8_t success = CanDecoder::decode1514(data, &msg);
+
+        next_pwseq1 = msg.pwseq1;
+        next_egt1 = msg.egt1;
+        next_egocor1 = msg.egocor1;
+        next_afr = msg.AFR1;
+        next_afrtgt1 = msg.afrtgt1;
+        
+      } else if(canId == 1515){
+
+        can_1515 msg;
+        uint8_t success = CanDecoder::decode1515(data, &msg);
+
+        next_knk_rtd = msg.knk_rtd;
+        next_sensors2 = msg.sensors2;
+        next_sensors1 = msg.sensors1;
+        next_batt = msg.batt;
+        
+      } else if(canId == 1516){
+        
+        can_1516 msg;
+        uint8_t success = CanDecoder::decode1516(data, &msg);
+
+        next_launch_timing = msg.launch_timing;
+        next_tc_retard = msg.tc_retard;
+        next_VSS1 = msg.VSS1;
+      }
     }
-    dispatcher.emit();
 
+    dispatcher.emit();
   }
 
 }
