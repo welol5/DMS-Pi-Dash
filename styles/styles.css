@@ -1,6 +1,7 @@
 .rpm-bar {
     /* background: rgb(0,255,255); */
     /* background: linear-gradient(90deg, rgba(0,255,255,1) 0%, rgba(255,0,0,1) 100%); */
+    min-height: 3rem;
 }
 
 .rpm-bar block.filled{
@@ -15,12 +16,13 @@
 
 .clock {
     min-width: 8rem;
-    font-size: 3rem;
+    font-size: 5rem;
 }
 
 label {
     color: rgb(0, 0, 0);
     font-weight: 900;
+    font-size: 1.5rem;
 }
 
 .background {
