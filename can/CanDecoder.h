@@ -9,31 +9,31 @@ struct can_1512{
 };
 
 struct can_1513{
-    uint16_t *adv_deg;
-    uint16_t *mat;
-    uint16_t *pw2;
-    uint16_t *pw1;
+    uint16_t adv_deg;
+    uint16_t mat;
+    uint16_t pw2;
+    uint16_t pw1;
 };
 
 struct can_1514{
-    uint16_t *pwseq1;
-    uint16_t *egt1;
-    uint16_t *egocor1;
-    uint8_t *AFR1;
-    uint8_t *afrtgt1;
+    uint16_t pwseq1;
+    uint16_t egt1;
+    uint16_t egocor1;
+    uint8_t AFR1;
+    uint8_t afrtgt1;
 };
 
 struct can_1515{
-    uint8_t *knk_rtd;
-    uint16_t *sensors2;
-    uint16_t *sensors1;
-    uint16_t *batt;
+    uint8_t knk_rtd;
+    uint16_t sensors2;
+    uint16_t sensors1;
+    uint16_t batt;
 };
 
 struct can_1516{
-    uint16_t *launch_timing;
-    uint16_t *tc_retard;
-    uint16_t *VSS1;
+    uint16_t launch_timing;
+    uint16_t tc_retard;
+    uint16_t VSS1;
 };
 
 class CanDecoder {
