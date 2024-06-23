@@ -39,8 +39,12 @@ PiDashWindow :: PiDashWindow() {
   rpm_bar.set_max_value(6900);
   rpm_bar.add_css_class("rpm-bar");
 
+  rpm_gauge.add_css_class("rpm-bar");
+
   rpm_other_pane.set_orientation(Gtk::Orientation::VERTICAL);
-  rpm_other_pane.set_start_child(rpm_bar);
+  // rpm_other_pane.set_start_child(rpm_bar);
+  rpm_other_pane.set_start_child(rpm_gauge);
+
 
   clock.add_css_class("clock");
   clock_other_pane.set_start_child(clock);

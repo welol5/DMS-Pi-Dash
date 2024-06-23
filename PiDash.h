@@ -14,6 +14,7 @@
 #include <gtkmm/cssprovider.h>
 #include "gui/GaugeCluster.h"
 #include "gui/Clock.h"
+#include "gui/RPMGauge.h"
 #include "can/CanDecoder.h"
 
 class PiDashWindow : public Gtk::Window {
@@ -25,6 +26,8 @@ class PiDashWindow : public Gtk::Window {
 
         Gtk::Paned rpm_other_pane;
         Gtk::LevelBar rpm_bar;
+        RPMGauge rpm_gauge;
+
 
         Gtk::Paned clock_other_pane;
         Clock clock;
