@@ -86,21 +86,18 @@ void PiDashWindow :: can_worker(int socket){
 
   while(true){
     //read values
-    //next_rpm = (next_rpm += 10)%6900;
-    next_voltage = rand()%1024;
-    next_oil_pressure = rand()%1024;
-    //next_coolent_temp = rand()%1024;
-    next_afr = rand()%1024;
 
-//    std::cout << "read frame" << std::endl;
+    //next_voltage = rand()%1024;
+    //next_oil_pressure = rand()%1024;
+    //next_coolent_temp = rand()%1024;
+    //next_afr = rand()%1024;
+
     struct can_frame frame;
     nbytes = read(socket, &frame, sizeof(can_frame));
-//    std::cout << "read nbytes: " << std::endl;
 
     if(nbytes < 0){
       std::cout << "error reading message" << std::endl;
     } else if(nbytes == sizeof(struct can_frame)){
-//      std::cout << "can id: " << frame.can_id << std::endl;
       __u32 canId = frame.can_id;
       __u8 dataLength = frame.len;
       __u8 *data = frame.data;
@@ -124,7 +121,7 @@ void PiDashWindow :: can_worker(int socket){
 
 void PiDashWindow :: update_gauges(){
   gauges.update_gauge("Voltage", next_voltage);
-  gauges.update_gauge("Oil pressure", next_oil_pressure);
+  gauges.update_gauge("Manifold air pressure", next_map);
   gauges.update_gauge("Coolent temp", next_coolent_temp);
   gauges.update_gauge("AFR", next_afr);
 

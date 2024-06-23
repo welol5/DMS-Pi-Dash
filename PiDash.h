@@ -44,9 +44,27 @@ class PiDashWindow : public Gtk::Window {
 
         int next_rpm;
         int next_voltage;
-        int next_oil_pressure;
+        //int next_oil_pressure;
         int next_coolent_temp;
         int next_afr;
+        int next_tps;
+        int next_map;
+        int next_adv_deg;
+        int next_mat;
+        int next_pw2;
+        int next_pw1;
+        int next_owseq1;
+        int next_egt1;
+        int next_egocor1;
+        int next_afrtgt1;
+        int next_knk_rtd;
+        int next_sensors2;
+        int next_sensors1;
+        int next_batt;
+        int next_launch_timing;
+        int next_tc_retard;
+        int next_VSS1
+
 
         void can_worker(int socket);
         void update_gauges();
