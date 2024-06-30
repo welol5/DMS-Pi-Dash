@@ -34,10 +34,6 @@ class PiDashWindow : public Gtk::Window {
 
         GaugeCluster gauges;
 
-        Gtk::Label test_label;
-        Gtk::Box test_box;
-        Gtk::Button test_button;
-
         void increase_rpms();
         int clock_update();
 
@@ -68,8 +64,13 @@ class PiDashWindow : public Gtk::Window {
         int next_tc_retard;
         int next_VSS1;
 
+        bool debugging = true;
+        int rpm_testing = 0;
+
 
         void can_worker(int socket);
         void update_gauges();
         void setup_css();
+        void map_gauge_values(int canId, __u8 *data);
+        void testing_map_gauge_values();
 };
