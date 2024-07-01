@@ -42,11 +42,10 @@ void RPMGauge::updateGrpahic(const Cairo::RefPtr<Cairo::Context>& cr, int width,
     //add ticks at every 1000 rpm
     int tickWidth = (width/100)/2;
     int tickOffset = width/ticks;
-    cr->set_source_rgba(0,0,0,0.5);
+    cr->set_source_rgba(1,1,1,1);
     for(int i = 0; i < ticks; i++){
         cr->rectangle(mapRPMToBar((i+1)*1000, width)-(tickWidth/2), 0, tickWidth, height);
         cr->fill();
-        // std::cout << "created tick @ " << (i+1)*tickOffset << std::endl;
     }
 }
 
