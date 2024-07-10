@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include "PiDash.h"
 
-#define TESTING_MODE TRUE
+#define TESTING_MODE FALSE
 
 PiDashWindow :: PiDashWindow() {
 
