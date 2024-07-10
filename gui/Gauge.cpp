@@ -6,6 +6,7 @@
 #include <glibmm/main.h>
 #include <gtkmm/stylecontext.h>
 #include <gtkmm/cssprovider.h>
+#include <bits/stdc++.h> 
 #include "Gauge.h"
 
 Gauge :: Gauge(const Glib::ustring &name){
@@ -19,4 +20,10 @@ Gauge :: Gauge(const Glib::ustring &name){
 
 void Gauge::update_value(int value){
     level.set_label(std::to_string(value));
+}
+
+void Gauge::update_value(float value){
+    std::stringstream s;
+    s<<value;
+    level.set_label(s.str());
 }

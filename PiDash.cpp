@@ -158,7 +158,7 @@ void PiDashWindow :: map_gauge_values(int canId, __u8 *data){
     next_knk_rtd = msg.knk_rtd;
     next_sensors2 = msg.sensors2;
     next_sensors1 = msg.sensors1;
-    next_batt = msg.batt;
+    next_voltage = msg.batt;
   } else if(canId == 1516){
     can_1516 msg;
     uint8_t success = CanDecoder::decode1516(data, &msg);
@@ -170,9 +170,10 @@ void PiDashWindow :: map_gauge_values(int canId, __u8 *data){
 
 void PiDashWindow :: testing_map_gauge_values(){
   next_rpm = rpm_testing;
-	// next_coolent_temp = msg.clt;
-  // next_tps = msg.tps;
-  // next_map = msg.map;
+	next_coolent_temp = 80.0;
+  next_tps = 0.0;
+  next_map = 100.0;
+  next_voltage = 11.5;
 }
 
 void PiDashWindow :: update_gauges(){

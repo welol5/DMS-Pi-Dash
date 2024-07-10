@@ -2,38 +2,38 @@
 #include <linux/can.h>
 
 struct can_1512{
-    uint16_t tps;
-    uint16_t clt;
+    float tps;
+    float clt;
     uint16_t rpm;
-    uint16_t map;
+    float map;
 };
 
 struct can_1513{
-    uint16_t adv_deg;
-    uint16_t mat;
-    uint16_t pw2;
-    uint16_t pw1;
+    float adv_deg;
+    float mat;
+    float pw2;
+    float pw1;
 };
 
 struct can_1514{
-    uint16_t pwseq1;
-    uint16_t egt1;
-    uint16_t egocor1;
-    uint8_t AFR1;
-    uint8_t afrtgt1;
+    float pwseq1;
+    float egt1;
+    float egocor1;
+    float AFR1;
+    float afrtgt1;
 };
 
 struct can_1515{
-    uint8_t knk_rtd;
-    uint16_t sensors2;
-    uint16_t sensors1;
-    uint16_t batt;
+    float knk_rtd;
+    float sensors2;
+    float sensors1;
+    float batt;
 };
 
 struct can_1516{
-    uint16_t launch_timing;
-    uint16_t tc_retard;
-    uint16_t VSS1;
+    float launch_timing;
+    float tc_retard;
+    float VSS1;
 };
 
 class CanDecoder {
