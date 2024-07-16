@@ -7,6 +7,7 @@
 #include <linux/can/raw.h>
 #include <unistd.h>
 #include "PiDash.h"
+#include "env/Env.h"
 
 #define TESTING_MODE FALSE
 
@@ -86,7 +87,7 @@ void PiDashWindow :: setup_css(){
         std::cerr << "parsing error: " << error.what() << std::endl;
       });
   css_provider->load_from_path(
-      "styles/styles.css");
+      Env::styles_path);
 
   Gtk::StyleContext::add_provider_for_display(
       Gdk::Display::get_default(), css_provider,
