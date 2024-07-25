@@ -1,1 +1,2 @@
 dataLogging.enabled=true
+dataLogging.fileLocation=/home/pidash/DMS-Pi-Dash
