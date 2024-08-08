@@ -1,4 +1,6 @@
 #include <cstdint>
+#include <map>
+#include <string>
 #include <linux/can.h>
 
 struct can_1512{
@@ -43,4 +45,13 @@ class CanDecoder {
         static uint8_t decode1514(uint8_t data[], can_1514* decodedData);
         static uint8_t decode1515(uint8_t data[], can_1515* decodedData);
         static uint8_t decode1516(uint8_t data[], can_1516* decodedData);
+
+        static uint8_t decode_can_frame(can_frame* frame, std::map<std::string,float>* decodedData);
+
+    private:
+        static uint8_t decode1512(uint8_t data[], std::map<std::string,float>* decodedData);
+        static uint8_t decode1513(uint8_t data[], std::map<std::string,float>* decodedData);
+        static uint8_t decode1514(uint8_t data[], std::map<std::string,float>* decodedData);
+        static uint8_t decode1515(uint8_t data[], std::map<std::string,float>* decodedData);
+        static uint8_t decode1516(uint8_t data[], std::map<std::string,float>* decodedData);
 };
