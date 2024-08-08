@@ -11,7 +11,7 @@
 
 Gauge :: Gauge(const Glib::ustring &name){
     label.set_label(name);
-    level.set_label("Placeholder");
+    level.set_label("Null");
 
     set_orientation(Gtk::Orientation::VERTICAL);
     set_start_child(level);
