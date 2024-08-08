@@ -26,7 +26,7 @@ class GaugeCluster : public Gtk::Grid {
         void update_gauge(std::string name, float value);
 
     protected:
-        std::vector<std::string> gauge_names = {"Voltage", "Manifold air pressure", "Coolent temp", "AFR"};
+        std::vector<std::string> gauge_names = {"Voltage", "MAP", "Coolent temp", "AFR"};
 
     private:
         std::map<std::string, int> gauges;

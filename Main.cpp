@@ -32,6 +32,7 @@ int main (int argc, char *argv[]) {
   if(processCommmandLineArgs(argc, argv) == 1){
     return 1;
   }
+  Logger logger;
 
   auto app = Gtk::Application::create("org.dallasmakerspace.pidash");
   return app->make_window_and_run<PiDashWindow>(1, argv);

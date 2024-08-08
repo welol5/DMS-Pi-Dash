@@ -16,6 +16,7 @@
 #include "gui/Clock.h"
 #include "gui/RPMGauge.h"
 #include "can/CanDecoder.h"
+#include "logging/Logger.h"
 
 class PiDashWindow : public Gtk::Window {
     public:
@@ -40,6 +41,7 @@ class PiDashWindow : public Gtk::Window {
     private:
         std::thread can_thread;
         Glib::Dispatcher dispatcher;
+        Logger* logger = Logger::getLogger();
 
         int next_rpm;
         float next_voltage;

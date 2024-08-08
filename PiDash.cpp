@@ -170,16 +170,25 @@ void PiDashWindow :: map_gauge_values(int canId, __u8 *data){
 }
 
 void PiDashWindow :: testing_map_gauge_values(){
+  using namespace std::chrono_literals;
   next_rpm = rpm_testing;
 	next_coolent_temp = 80.0;
   next_tps = 0.0;
   next_map = 100.0;
   next_voltage = 11.5;
+
+  std::stringstream s;
+  s<<","<<next_rpm;
+  s<<","<<next_coolent_temp;
+  s<<","<<next_voltage;
+  s<<","<<next_map;
+  logger->log(1, s.str());
+  std::this_thread::sleep_for(20ms);
 }
 
 void PiDashWindow :: update_gauges(){
   gauges.update_gauge("Voltage", next_voltage);
-  gauges.update_gauge("Manifold air pressure", next_map);
+  gauges.update_gauge("MAP", next_map);
   gauges.update_gauge("Coolent temp", next_coolent_temp);
   gauges.update_gauge("AFR", next_afr);
 

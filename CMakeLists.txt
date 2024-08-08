@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.25)
 project(DMS-Pi-Dash LANGUAGES CXX)
 
-set(SOURCES env/Env.cpp can/CanDecoder.cpp gui/RPMGauge.cpp gui/Clock.cpp gui/Gauge.cpp gui/GaugeCluster.cpp PiDash.cpp Main.cpp)
+set(SOURCES env/Env.cpp logging/Logger.cpp can/CanDecoder.cpp gui/RPMGauge.cpp gui/Clock.cpp gui/Gauge.cpp gui/GaugeCluster.cpp PiDash.cpp Main.cpp)
+set(CMAKE_CXX_STANDARD 20)
 
 find_package(PkgConfig)
 pkg_check_modules(GTKMM gtkmm-4.0)
