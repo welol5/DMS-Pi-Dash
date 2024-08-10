@@ -14,6 +14,7 @@ class Logger {
 
     private:
         static Logger* logger;
+        bool isEnabled;
 
         std::mutex mutex;
         std::deque<std::string> write_buffer;

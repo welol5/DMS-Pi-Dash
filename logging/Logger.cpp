@@ -15,7 +15,6 @@ Logger::Logger(){
     log_level = std::atoi(levelString.c_str());
 
     //start writing thread
-    bool isEnabled;
     std::istringstream(Env::enviornmentVaribles["dataLogging.enabled"]) >> std::boolalpha >> isEnabled;
     if(isEnabled){
         write_thread = std::thread(&Logger::write, this);
@@ -32,7 +31,9 @@ void Logger::log(uint8_t level, std::string message){
         std::stringstream s;
         std::chrono::time_point now = std::chrono::high_resolution_clock::now();
         s << std::to_string(level) << " " << now.time_since_epoch().count() << " " << message;
-        log_buffer.push_back(s.str());
+        if(isEnabled){
+            log_buffer.push_back(s.str());
+        }
     }
 
     if(mutex.try_lock()){

@@ -119,8 +119,14 @@ void PiDashWindow :: can_worker(int socket){
       __u8 *data = frame.data;
       #if TESTING_MODE == TRUE
         testing_map_gauge_values();
+        std::map<std::string, float> dataMap;
+        testing_map_gauge_values(&dataMap);
+        update_current_map(&dataMap);
       #else
         map_gauge_values(canId, data);
+        std::map<std::string, float> dataMap;
+        CanDecoder::decode_can_frame(&frame, &dataMap);
+        update_current_map(&dataMap);
       #endif
       
     }
@@ -128,6 +134,20 @@ void PiDashWindow :: can_worker(int socket){
     dispatcher.emit();
   }
 
+}
+
+void PiDashWindow :: update_current_map(std::map<std::string,float>* updatedData){
+  for (auto const& data : *updatedData){
+    next_values[data.first]=data.second;
+    std::cout << data.first << ":" << data.second << std::endl;
+  }
+
+  //log current set
+  std::stringstream s;
+  for(auto const& data: next_values){
+    s << data.second << ",";
+  }
+  logger->log(1,s.str());
 }
 
 void PiDashWindow :: map_gauge_values(int canId, __u8 *data){
@@ -186,12 +206,20 @@ void PiDashWindow :: testing_map_gauge_values(){
   std::this_thread::sleep_for(20ms);
 }
 
+void PiDashWindow :: testing_map_gauge_values(std::map<std::string,float> *data){
+  (*data)["rpm"] = rpm_testing;
+  (*data)["clt"] = 80.0;
+  (*data)["map"] = 100.0;
+  (*data)["batt"] = 11.5;
+  (*data)["afr"] = 14;
+}
+
 void PiDashWindow :: update_gauges(){
-  gauges.update_gauge("Voltage", next_voltage);
-  gauges.update_gauge("MAP", next_map);
-  gauges.update_gauge("Coolent temp", next_coolent_temp);
-  gauges.update_gauge("AFR", next_afr);
+  gauges.update_gauge("Voltage", next_values["batt"]);
+  gauges.update_gauge("MAP", next_values["map"]);
+  gauges.update_gauge("Coolent temp", next_values["clt"]);
+  gauges.update_gauge("AFR", next_values["AFR1"]);
 
   // rpm_bar.set_value(next_rpm);
-  rpm_gauge.update_value(next_rpm);
+  rpm_gauge.update_value(next_values["rpm"]);
 }
