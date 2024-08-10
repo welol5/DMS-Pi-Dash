@@ -11,7 +11,7 @@ class RPMGauge : public Gtk::Paned {
 
         int rpm_value;
         int min;
-        int max = 6900;
+        int max = 6969;
         int ticks;
 
         void updateGrpahic(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);
