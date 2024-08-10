@@ -44,28 +44,6 @@ class PiDashWindow : public Gtk::Window {
         Glib::Dispatcher dispatcher;
         Logger* logger = Logger::getLogger();
 
-        int next_rpm;
-        float next_voltage;
-        //int next_oil_pressure;
-        float next_coolent_temp;
-        float next_afr;
-        float next_tps;
-        float next_map;
-        float next_adv_deg;
-        float next_mat;
-        float next_pw2;
-        float next_pw1;
-        float next_pwseq1;
-        float next_egt1;
-        float next_egocor1;
-        float next_afrtgt1;
-        float next_knk_rtd;
-        float next_sensors2;
-        float next_sensors1;
-        float next_launch_timing;
-        float next_tc_retard;
-        float next_VSS1;
-
         std::map<std::string, float> next_values{{"tps",0},{"clt",0},{"rpm",0},{"map",0},
                                                     {"adv_deg",0},{"mat",0},{"pw2",0},{"pw1",0},
                                                     {"pwseq1",0},{"egt1",0},{"egocor1",0},{"AFR1",0},{"afrtgt1",0},
@@ -81,6 +59,5 @@ class PiDashWindow : public Gtk::Window {
         void setup_css();
         void map_gauge_values(int canId, __u8 *data);
         void update_current_map(std::map<std::string,float>* updatedData);
-        void testing_map_gauge_values();
         void testing_map_gauge_values(std::map<std::string,float> *data);
 };

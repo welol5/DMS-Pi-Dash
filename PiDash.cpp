@@ -72,7 +72,7 @@ PiDashWindow :: PiDashWindow() {
 void PiDashWindow :: increase_rpms(){
   double current_rpms = rpm_testing;
   current_rpms += 100;
-  if(current_rpms > 6900){
+  if(current_rpms > 6969){
     current_rpms = 0;
   }
   rpm_testing = current_rpms;
@@ -104,7 +104,7 @@ void PiDashWindow :: can_worker(int socket){
     struct can_frame frame;
 
     #if TESTING_MODE == TRUE
-      usleep(100000);
+      usleep(20000);
       nbytes = sizeof(struct can_frame);
       increase_rpms();
     #else
@@ -118,12 +118,10 @@ void PiDashWindow :: can_worker(int socket){
       __u8 dataLength = frame.len;
       __u8 *data = frame.data;
       #if TESTING_MODE == TRUE
-        testing_map_gauge_values();
         std::map<std::string, float> dataMap;
         testing_map_gauge_values(&dataMap);
         update_current_map(&dataMap);
       #else
-        map_gauge_values(canId, data);
         std::map<std::string, float> dataMap;
         CanDecoder::decode_can_frame(&frame, &dataMap);
         update_current_map(&dataMap);
@@ -148,62 +146,6 @@ void PiDashWindow :: update_current_map(std::map<std::string,float>* updatedData
     s << data.second << ",";
   }
   logger->log(1,s.str());
-}
-
-void PiDashWindow :: map_gauge_values(int canId, __u8 *data){
-  if(canId == 1512){
-    can_1512 msg;
-    uint8_t success = CanDecoder::decode1512(data, &msg);
-	  next_rpm = msg.rpm;
-	  next_coolent_temp = msg.clt;
-    next_tps = msg.tps;
-    next_map = msg.map;
-  } else if(canId == 1513){
-    can_1513 msg;
-    uint8_t success = CanDecoder::decode1513(data, &msg);
-    next_adv_deg = msg.adv_deg;
-    next_mat = msg.mat;
-    next_pw2 = msg.pw2;
-    next_pw1 = msg.pw1;
-  } else if(canId == 1514){
-    can_1514 msg;
-    uint8_t success = CanDecoder::decode1514(data, &msg);
-    next_pwseq1 = msg.pwseq1;
-    next_egt1 = msg.egt1;
-    next_egocor1 = msg.egocor1;
-    next_afr = msg.AFR1;
-    next_afrtgt1 = msg.afrtgt1;
-  } else if(canId == 1515){
-    can_1515 msg;
-    uint8_t success = CanDecoder::decode1515(data, &msg);
-    next_knk_rtd = msg.knk_rtd;
-    next_sensors2 = msg.sensors2;
-    next_sensors1 = msg.sensors1;
-    next_voltage = msg.batt;
-  } else if(canId == 1516){
-    can_1516 msg;
-    uint8_t success = CanDecoder::decode1516(data, &msg);
-    next_launch_timing = msg.launch_timing;
-    next_tc_retard = msg.tc_retard;
-    next_VSS1 = msg.VSS1;
-  }
-}
-
-void PiDashWindow :: testing_map_gauge_values(){
-  using namespace std::chrono_literals;
-  next_rpm = rpm_testing;
-	next_coolent_temp = 80.0;
-  next_tps = 0.0;
-  next_map = 100.0;
-  next_voltage = 11.5;
-
-  std::stringstream s;
-  s<<","<<next_rpm;
-  s<<","<<next_coolent_temp;
-  s<<","<<next_voltage;
-  s<<","<<next_map;
-  logger->log(1, s.str());
-  std::this_thread::sleep_for(20ms);
 }
 
 void PiDashWindow :: testing_map_gauge_values(std::map<std::string,float> *data){
