@@ -137,7 +137,6 @@ void PiDashWindow :: can_worker(int socket){
 void PiDashWindow :: update_current_map(std::map<std::string,float>* updatedData){
   for (auto const& data : *updatedData){
     next_values[data.first]=data.second;
-    std::cout << data.first << ":" << data.second << std::endl;
   }
 
   //log current set

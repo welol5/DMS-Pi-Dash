@@ -60,12 +60,9 @@ void Logger::write(){
                 std::string message = write_buffer.front();
                 write_buffer.pop_front();
                 logFile << message << std::endl;
-                std::cout << "writing message: " << message << std::endl;
             }
             mutex.unlock();
             logFile.close();
-
-            //open log file
         }
     }
 }
