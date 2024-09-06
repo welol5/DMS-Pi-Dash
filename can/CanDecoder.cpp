@@ -47,13 +47,13 @@ uint8_t CanDecoder :: decode_can_frame(can_frame* frame, std::map<std::string,fl
     if(canID == 1512){
         retCode = decode1512(frame->data, decodedData);
     } else if(canID == 1513){
-        retCode = decode1512(frame->data, decodedData);
+        retCode = decode1513(frame->data, decodedData);
     } else if(canID == 1514){
-        retCode = decode1512(frame->data, decodedData);
+        retCode = decode1514(frame->data, decodedData);
     } else if(canID == 1515){
-        retCode = decode1512(frame->data, decodedData);
+        retCode = decode1515(frame->data, decodedData);
     } else if(canID == 1516){
-        retCode = decode1512(frame->data, decodedData);
+        retCode = decode1516(frame->data, decodedData);
     }
     return retCode;
 }
