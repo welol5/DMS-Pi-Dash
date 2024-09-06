@@ -156,11 +156,20 @@ void PiDashWindow :: testing_map_gauge_values(std::map<std::string,float> *data)
 }
 
 void PiDashWindow :: update_gauges(){
-  gauges.update_gauge("Voltage", next_values["batt"]);
-  gauges.update_gauge("MAP", next_values["map"]);
-  gauges.update_gauge("Coolent temp", next_values["clt"]);
-  gauges.update_gauge("AFR", next_values["AFR1"]);
+  if(next_values["batt_set"] == 1){
+    gauges.update_gauge("Voltage", next_values["batt"]);
+  }
+  if(nextValues["map_set"] == 1){
+    gauges.update_gauge("MAP", next_values["map"]);
+  }
+  if(nextValues["clt_set"] == 1){
+    gauges.update_gauge("Coolent temp", next_values["clt"]);
+  }
+  if(nextValues["AFR1_set"] == 1){
+    gauges.update_gauge("AFR", next_values["AFR1"]);
+  }
 
-  // rpm_bar.set_value(next_rpm);
-  rpm_gauge.update_value(next_values["rpm"]);
+  if(nextValues["rpm_set"] == 1){
+    rpm_gauge.update_value(next_values["rpm"]);
+  }
 }
