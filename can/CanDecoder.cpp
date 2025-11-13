@@ -117,3 +117,216 @@ uint8_t CanDecoder :: decode1516(uint8_t data[], std::map<std::string,float>* de
     (*decodedData)["VSS1_set"] = 1;
     return 0;
 }
+
+//needs more work
+uint8_t CanDecoder :: decode1520(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)["seconds"] = ((data[6] << 8) | (data[7]));
+    (*decodedData)["seconds_set"] = 1;
+    (*decodedData)["pw1"] = ((data[4] << 8) | (data[5]))/1000.0;
+    (*decodedData)["pw1_set"] = 1;
+    (*decodedData)["pw2"] = ((data[2] << 8) | (data[3]))/1000.0;
+    (*decodedData)["pw2_set"] = 1;
+    (*decodedData)["rpm"] = ((data[0] << 8) | (data[1]));
+    (*decodedData)["rpm_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1521(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)["adv_deg"] = ((data[6] << 8) | (data[7]))/10.0;
+    (*decodedData)["adv_deg_set"] = 1;
+    (*decodedData)["squirt"] = (data[5]);
+    (*decodedData)["squirt_set"] = 1;
+    (*decodedData)["engine"] = (data[4]);
+    (*decodedData)["engine_set"] = 1;
+    (*decodedData)["afrtgt1"] = (data[3])/10.0;
+    (*decodedData)["afrtgt1_set"] = 1;
+    (*decodedData)["afrtgt2"] = (data[2])/10.0;
+    (*decodedData)["afrtgt2_set"] = 1;
+    (*decodedData)["wbo2_en1"] = | (data[1]);
+    (*decodedData)["wbo2_en1_set"] = 1;
+    (*decodedData)["wbo2_en2"] = (data[1]);
+    (*decodedData)["wbo2_en2_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1522(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)["baro"] = ((data[6] << 8) | (data[7]))/10.0;
+    (*decodedData)["baro_set"] = 1;
+    (*decodedData)["map"] = ((data[4] << 8) | (data[5]))/10.0;
+    (*decodedData)["map_set"] = 1;
+    (*decodedData)["mat"] = ((data[2] << 8) | (data[3]))/10.0;
+    (*decodedData)["mat_set"] = 1;
+    (*decodedData)["clt"] = ((data[0] << 8) | (data[1]))/10.0;
+    (*decodedData)["clt_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1523(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)["tps"] = ((data[6] << 8) | (data[7]))/10.0;
+    (*decodedData)["tps_set"] = 1;
+    (*decodedData)["batt"] = ((data[4] << 8) | (data[5]))/10.0;
+    (*decodedData)["batt_set"] = 1;
+    (*decodedData)["afr1_old"] = ((data[2] << 8) | (data[3]))/10.0;
+    (*decodedData)["afr1_old_set"] = 1;
+    (*decodedData)["afr2_old"] = ((data[0] << 8) | (data[1]))/10.0;
+    (*decodedData)["afr2_old_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1524(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)["knock"] = ((data[6] << 8) | (data[7]))/10.0;
+    (*decodedData)["knock_set"] = 1;
+    (*decodedData)["egocor1"] = ((data[4] << 8) | (data[5]))/10.0;
+    (*decodedData)["egocor1_set"] = 1;
+    (*decodedData)["egocor2"] = ((data[2] << 8) | (data[3]))/10.0;
+    (*decodedData)["egocor2_set"] = 1;
+    (*decodedData)["aircor"] = ((data[0] << 8) | (data[1]))/10.0;
+    (*decodedData)["aircor_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1525(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)["warmcor"] = ((data[6] << 8) | (data[7]))/10.0;
+    (*decodedData)["warmcor_set"] = 1;
+    (*decodedData)["tpsaccel"] = ((data[4] << 8) | (data[5]))/10.0;
+    (*decodedData)["tpsaccel_set"] = 1;
+    (*decodedData)["tpsfuelcut"] = ((data[2] << 8) | (data[3]))/10.0;
+    (*decodedData)["tpsfuelcut_set"] = 1;
+    (*decodedData)["barocor"] = ((data[0] << 8) | (data[1]))/10.0;
+    (*decodedData)["barocor_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1526(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)["totalcor"] = ((data[6] << 8) | (data[7]))/10.0;
+    (*decodedData)["totalcor_set"] = 1;
+    (*decodedData)["ve1"] = ((data[4] << 8) | (data[5]))/10.0;
+    (*decodedData)["ve1_set"] = 1;
+    (*decodedData)["ve2"] = ((data[2] << 8) | (data[3]))/10.0;
+    (*decodedData)["ve2_set"] = 1;
+    (*decodedData)["iacstep"] = ((data[0] << 8) | (data[1]));
+    (*decodedData)["iacstep_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1527(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)["cold_adv_deg"] = ((data[6] << 8) | (data[7]))/10.0;
+    (*decodedData)["cold_adv_deg_set"] = 1;
+    (*decodedData)["TPSdot"] = ((data[4] << 8) | (data[5]))/10.0;
+    (*decodedData)["TPSdot_set"] = 1;
+    (*decodedData)["MAPdot"] = ((data[2] << 8) | (data[3]));
+    (*decodedData)["MAPdot_set"] = 1;
+    (*decodedData)["RPMdot"] = ((data[0] << 8) | (data[1]));
+    (*decodedData)["RPMdot_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1528(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)["MAFload"] = ((data[6] << 8) | (data[7]))/10.0;
+    (*decodedData)["MAFload_set"] = 1;
+    (*decodedData)["fuelload"] = ((data[4] << 8) | (data[5]))/10.0;
+    (*decodedData)["fuelload_set"] = 1;
+    (*decodedData)["fuelcor"] = ((data[2] << 8) | (data[3]))/10.0;
+    (*decodedData)["fuelcorset"] = 1;
+    (*decodedData)["MAF"] = ((data[0] << 8) | (data[1]))/10.0;
+    (*decodedData)["MAF_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1529(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)["egoV1"] = ((data[6] << 8) | (data[7]))/100.0;
+    (*decodedData)["egoV1_set"] = 1;
+    (*decodedData)["egoV2"] = ((data[4] << 8) | (data[5]))/100.0;
+    (*decodedData)["egoV2_set"] = 1;
+    (*decodedData)["dwell"] = ((data[2] << 8) | (data[3]))/10.0;
+    (*decodedData)["dwell_set"] = 1;
+    (*decodedData)["dwell_trl"] = ((data[0] << 8) | (data[1]))/10.0;
+    (*decodedData)["dwell_trl_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1530(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)["status1"] = (data[7]);
+    (*decodedData)["status1_set"] = 1;
+    (*decodedData)["status2"] = (data[6]);
+    (*decodedData)["status2_set"] = 1;
+    (*decodedData)["status3"] = (data[5]);
+    (*decodedData)["status3_set"] = 1;
+    (*decodedData)["status4"] = (data[4]);
+    (*decodedData)["status4set"] = 1;
+    (*decodedData)["status5"] = (data[2] << 8 | (data[1]));
+    (*decodedData)["status5_set"] = 1;
+    (*decodedData)["status6"] = (data[1]);
+    (*decodedData)["status6_set"] = 1;
+    (*decodedData)["status7"] = (data[0]);
+    (*decodedData)["status7_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1531(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)["wallfuel1"] = ((data[4] << 24) | (data[5] << 16 |) | (data[6] << 8) | (data[7]))/100.0;
+    (*decodedData)["wallfuel1_set"] = 1;
+    (*decodedData)["wallfuel2"] = ((data[4] << 24) | (data[5] << 16 |) | (data[6] << 8) | (data[7]))/100.0;
+    (*decodedData)["wallfuel2_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1532(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)[""] = ((data[6] << 8) | (data[7]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[4] << 8) | (data[5]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[2] << 8) | (data[3]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[0] << 8) | (data[1]))/10.0;
+    (*decodedData)["_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1533(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)[""] = ((data[6] << 8) | (data[7]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[4] << 8) | (data[5]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[2] << 8) | (data[3]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[0] << 8) | (data[1]))/10.0;
+    (*decodedData)["_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1534(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)[""] = ((data[6] << 8) | (data[7]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[4] << 8) | (data[5]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[2] << 8) | (data[3]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[0] << 8) | (data[1]))/10.0;
+    (*decodedData)["_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1535(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)[""] = ((data[6] << 8) | (data[7]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[4] << 8) | (data[5]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[2] << 8) | (data[3]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[0] << 8) | (data[1]))/10.0;
+    (*decodedData)["_set"] = 1;
+    return 0;
+}
+
+uint8_t CanDecoder :: decode1536(uint8_t data[], std::map<std::string,float>* decodedData){
+    (*decodedData)[""] = ((data[6] << 8) | (data[7]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[4] << 8) | (data[5]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[2] << 8) | (data[3]))/10.0;
+    (*decodedData)["_set"] = 1;
+    (*decodedData)[""] = ((data[0] << 8) | (data[1]))/10.0;
+    (*decodedData)["_set"] = 1;
+    return 0;
+}
