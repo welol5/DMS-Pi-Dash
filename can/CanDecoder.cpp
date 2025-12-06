@@ -54,6 +54,40 @@ uint8_t CanDecoder :: decode_can_frame(can_frame* frame, std::map<std::string,fl
         retCode = decode1515(frame->data, decodedData);
     } else if(canID == 1516){
         retCode = decode1516(frame->data, decodedData);
+    } else if(canID == 1520){
+        retCode = decode1520(frame->data, decodedData);
+    } else if(canID == 1521){
+        retCode = decode1521(frame->data, decodedData);
+    } else if(canID == 1522){
+        retCode = decode1522(frame->data, decodedData);
+    } else if(canID == 1523){
+        retCode = decode1523(frame->data, decodedData);
+    } else if(canID == 1524){
+        retCode = decode1524(frame->data, decodedData);
+    } else if(canID == 1525){
+        retCode = decode1525(frame->data, decodedData);
+    } else if(canID == 1526){
+        retCode = decode1526(frame->data, decodedData);
+    } else if(canID == 1527){
+        retCode = decode1527(frame->data, decodedData);
+    } else if(canID == 1528){
+        retCode = decode1528(frame->data, decodedData);
+    } else if(canID == 1529){
+        retCode = decode1529(frame->data, decodedData);
+    } else if(canID == 1530){
+        retCode = decode1530(frame->data, decodedData);
+    } else if(canID == 1531){
+        retCode = decode1531(frame->data, decodedData);
+    } else if(canID == 1532){
+        retCode = decode1532(frame->data, decodedData);
+    } else if(canID == 1533){
+        retCode = decode1533(frame->data, decodedData);
+    } else if(canID == 1534){
+        retCode = decode1534(frame->data, decodedData);
+    } else if(canID == 1535){
+        retCode = decode1535(frame->data, decodedData);
+    } else if(canID == 1536){
+        retCode = decode1536(frame->data, decodedData);
     }
     return retCode;
 }
