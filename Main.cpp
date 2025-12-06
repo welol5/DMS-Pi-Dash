@@ -6,7 +6,7 @@
 
 int processCommmandLineArgs(int argc, char *argv[]){
   int retCode = 0;
-  std::string rootPath = "/home/pidash/DMSPiDash";
+  std::string rootPath = "/home/pidash/DMS-Pi-Dash";
   if(argc > 0){
     for(int i = 0; i < argc; i++){
       if(strcmp("root", argv[i]) == 0){
