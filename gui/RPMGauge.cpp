@@ -35,7 +35,7 @@ void RPMGauge::updateGrpahic(const Cairo::RefPtr<Cairo::Context>& cr, int width,
 
     //add rpm bar
     int rpm_bar_length = mapRPMToBar(rpm_value, width);
-    if(rmp_value > 6700) {
+    if(rpm_value > 6700) {
         cr->set_source_rgb(1,0,0);
     } else if(rpm_value > 6500){
         cr->set_source_rgb(0,0,1);
