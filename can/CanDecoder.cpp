@@ -176,7 +176,7 @@ uint8_t CanDecoder :: decode1521(uint8_t data[], std::map<std::string,float>* de
     (*decodedData)["afrtgt1_set"] = 1;
     (*decodedData)["afrtgt2"] = (data[2])/10.0;
     (*decodedData)["afrtgt2_set"] = 1;
-    (*decodedData)["wbo2_en1"] = | (data[1]);
+    (*decodedData)["wbo2_en1"] = (data[1]);
     (*decodedData)["wbo2_en1_set"] = 1;
     (*decodedData)["wbo2_en2"] = (data[1]);
     (*decodedData)["wbo2_en2_set"] = 1;
@@ -310,9 +310,9 @@ uint8_t CanDecoder :: decode1531(uint8_t data[], std::map<std::string,float>* de
 }
 
 uint8_t CanDecoder :: decode1532(uint8_t data[], std::map<std::string,float>* decodedData){
-    (*decodedData)["wallfuel1"] = ((data[4] << 24) | (data[5] << 16 |) | (data[6] << 8) | (data[7]))/100.0;
+    (*decodedData)["wallfuel1"] = ((data[4] << 24) | (data[5] << 16) | (data[6] << 8) | (data[7]))/100.0;
     (*decodedData)["wallfuel1_set"] = 1;
-    (*decodedData)["wallfuel2"] = ((data[4] << 24) | (data[5] << 16 |) | (data[6] << 8) | (data[7]))/100.0;
+    (*decodedData)["wallfuel2"] = ((data[4] << 24) | (data[5] << 16) | (data[6] << 8) | (data[7]))/100.0;
     (*decodedData)["wallfuel2_set"] = 1;
     return 0;
 }
