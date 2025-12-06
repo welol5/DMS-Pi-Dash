@@ -45,7 +45,7 @@ struct can_1520{
     float pw1;
     float pw2;
     uint16_t rpm;
-}
+};
 
 struct can_1521{
     float adv_deg;
@@ -55,63 +55,63 @@ struct can_1521{
     uint8_t afrtgt2;
     uint8_t wbo2_en1;
     uint8_t wbo_en2;
-}
+};
 
 struct can_1522{
     float baro;
     float map;
     float mat;
     float clt;
-}
+};
 
 struct can_1523{
     float tps;
     float batt;
     float afr1_old;
     float afr2_old;
-}
+};
 
 struct can_1524{
     float knock;
     float egocor1;
     float egocor2;
     float aircor;
-}
+};
 
 struct can_1525{
     float warmcor;
     float tpsaccel;
     float tpsfuelcut;
     float barocor;
-}
+};
 
 struct can_1526{
     float totalcor;
     float ve1;
     float ve2;
     float iavstep;
-}
+};
 
 struct can_1527{
     float cold_adv_deg;
     uint8_t TPSdot;
     uint8_t MAPdot;
     float RPMdot;
-}
+};
 
 struct can_1528{
     float MAFload;
     float fuelload;
     float fuelcor;
     float MAF;
-}
+};
 
 struct can_1529{
     float egoV1;
     float egoV2;
     float dwell;
     float dwell_trl;
-}
+};
 
 struct can_1530{
     uint8_t status1;
@@ -121,47 +121,47 @@ struct can_1530{
     uint8_t status5;
     uint8_t status6;
     uint8_t status7;
-}
+};
 
 struct can_1531{
     float fuelload2;
     float ignload;
     float ifnload2;
     float airtemp;
-}
+};
 
 struct can_1532{
     double wallfuel1;
     double wallfuel2;
-}
+};
 
 struct can_1533{
     float sensor1;
     float sensor2;
     float sensor3;
     float sensor4;
-}
+};
 
 struct can_1534{
     float sensor5;
     float sensor6;
     float sensor7;
     float sensor8;
-}
+};
 
 struct can_1535{
     float sensor9;
     float sensor10;
     float sensor11;
     float sensor12;
-}
+};
 
 struct can_1536{
     float sensor13;
     float sensor14;
     float sensor15;
     float sensor16;
-}
+};
 
 class CanDecoder {
     public:
