@@ -159,14 +159,11 @@ void PiDashWindow :: update_gauges(){
   if(next_values["batt_set"] == 1){
     gauges.update_gauge("Voltage", next_values["batt"]);
   }
-  if(next_values["map_set"] == 1){
-    gauges.update_gauge("MAP", next_values["map"]);
+    if(next_values["clt_set"] == 1){
+    gauges.update_gauge("CLT", next_values["clt"]);
   }
-  if(next_values["clt_set"] == 1){
-    gauges.update_gauge("Coolent temp", next_values["clt"]);
-  }
-  if(next_values["AFR1_set"] == 1){
-    gauges.update_gauge("AFR", next_values["AFR1"]);
+  if(next_values["sensors4_set"] == 1){
+    gauges.update_gauge("Oil", next_values["sensors4"]);
   }
 
   if(next_values["rpm_set"] == 1){
