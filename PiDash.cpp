@@ -162,8 +162,8 @@ void PiDashWindow :: update_gauges(){
     if(next_values["clt_set"] == 1){
     gauges.update_gauge("CLT", next_values["clt"]);
   }
-  if(next_values["sensors4_set"] == 1){
-    gauges.update_gauge("Oil", next_values["sensors4"]);
+  if(next_values["sensors3_set"] == 1){
+    gauges.update_gauge("Oil", next_values["sensors3"]);
   }
 
   if(next_values["rpm_set"] == 1){
